@@ -1,23 +1,24 @@
-import React, {useState} from "react"
+import React from "react"
 import './App.css';
-import {Button} from "@mui/material"
-import Task from "./Task"
-
+import Tasks from "./Tasks"
+import {createTheme, ThemeProvider, Typography} from "@mui/material"
+import {deepOrange} from "@mui/material/colors"
 
 function App() {
-  const taskData = {Title: "Title", Description: "Description", Date: "9/29/2021"}
-  const [tasks, setTasks] = useState([])
-  const addTask = () => {
-    setTasks([...tasks, taskData])
-  }
+  const theme = createTheme({
+    palette: {
+      primary: {
+        main: deepOrange[400]
+      }
+    }
+  })
   return (
-    <div className="App" style={{padding: "20px", maxWidth: "750px", margin: "0px auto"}}>
-      <h1 style={{textAlign: "center"}}>Task Manager</h1>
-      <Button color="primary" variant="contained" onClick={addTask}>Add task</Button>
-      {tasks.map((task) => (
-        <Task Title={task.Title} Description={task.Description} Date={task.Date} />
-      ))}
-    </div>
+    <ThemeProvider theme={theme}>
+      <div className="App" style={{padding: "20px"}}>
+        <Typography variant="h5" style={{textAlign: "center", fontWeight: "bold", marginBottom: "20px"}}>Task Manager</Typography>
+        <Tasks />
+      </div>
+    </ThemeProvider>
   );
 }
 
