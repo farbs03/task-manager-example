@@ -1,23 +1,22 @@
-import logo from './logo.svg';
+import React, {useState} from "react"
 import './App.css';
+import {Button} from "@mui/material"
+import Task from "./Task"
+
 
 function App() {
+  const taskData = {Title: "Title", Description: "Description", Date: "9/29/2021"}
+  const [tasks, setTasks] = useState([])
+  const addTask = () => {
+    setTasks([...tasks, taskData])
+  }
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="App" style={{padding: "20px", maxWidth: "750px", margin: "0px auto"}}>
+      <h1 style={{textAlign: "center"}}>Task Manager</h1>
+      <Button color="primary" variant="contained" onClick={addTask}>Add task</Button>
+      {tasks.map((task) => (
+        <Task Title={task.Title} Description={task.Description} Date={task.Date} />
+      ))}
     </div>
   );
 }
